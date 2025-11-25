@@ -127,6 +127,7 @@ Génère exactement cette structure JSON (respecte les clés et types) :
   }
 }
 
+IMPORTANT : Seules les phrases doivent commencer par une majuscule (pas chaque mot) et être rédigées de manière professionnelle.
 Sois concis mais complet. Fournis uniquement du JSON valide.
 `;
 

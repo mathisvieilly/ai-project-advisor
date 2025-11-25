@@ -1,0 +1,150 @@
+{
+  "id": "751020c3-7a6a-4ce5-90bd-a05ed73d2d76",
+  "createdAt": "2025-11-25T09:53:55.273Z",
+  "status": "completed",
+  "analysis": {
+    "name": "LIV2GO",
+    "description": "Une application de gestion de service livraison à destination des préparateurs et livreurs, avec une configuration avancé des workflows de livraison, des étapes de préparation, suivi des commandes pour le client, suivi des livreurs, gestion des oublis de produits, gestion des clients, gestion des tournées de livraison.",
+    "businessModel": {
+      "revenueStreams": [
+        "Abonnements mensuels",
+        "Commissions sur les livraisons",
+        "Publicité intégrée"
+      ],
+      "pricingStrategy": {
+        "tiers": [
+          {
+            "name": "Plan Basique",
+            "price": "29€ par mois",
+            "features": [
+              "Gestion des commandes",
+              "Suivi des livreurs"
+            ]
+          },
+          {
+            "name": "Plan Avancé",
+            "price": "49€ par mois",
+            "features": [
+              "Gestion des tournées de livraison",
+              "Alertes en temps réel"
+            ]
+          },
+          {
+            "name": "Plan Premium",
+            "price": "79€ par mois",
+            "features": [
+              "Configuration avancée des workflows",
+              "Support prioritaire"
+            ]
+          }
+        ]
+      }
+    },
+    "marketAnalysis": {
+      "marketSize": "Le marché de la livraison à domicile en France est estimé à 10 milliards d'euros en 2023.",
+      "trends": [
+        "augmentation des achats en ligne",
+        "demande croissante de services de livraison rapide",
+        "digitalisation des services de logistique"
+      ],
+      "opportunities": [
+        "croissance du marché des applications de livraison",
+        "partenariats avec des commerces locaux",
+        "intégration de technologies d'optimisation de la livraison"
+      ]
+    },
+    "swotAnalysis": {
+      "Forces": [
+        "solution complète de gestion",
+        "interface utilisateur intuitive",
+        "suivi en temps réel"
+      ],
+      "Faiblesses": [
+        "dépendance à la technologie",
+        "besoin de mise à jour constante",
+        "coûts de développement élevés"
+      ],
+      "Opportunités": [
+        "expansion internationale",
+        "nouvelles fonctionnalités basées sur l'IA",
+        "collaboration avec des entreprises de transport"
+      ],
+      "Menaces": [
+        "concurrence accrue",
+        "changements réglementaires",
+        "fluctuation des coûts de transport"
+      ]
+    },
+    "competitorsAnalysis": {
+      "mainCompetitors": [
+        {
+          "name": "Amazon Logistics",
+          "strengths": [
+            "Réseau de distribution étendu",
+            "Technologie avancée de gestion des stocks"
+          ],
+          "weaknesses": [
+            "Coûts élevés de service",
+            "Complexité des opérations pour les petites entreprises"
+          ]
+        },
+        {
+          "name": "DHL Supply Chain",
+          "strengths": [
+            "Expertise en logistique",
+            "Solutions personnalisées"
+          ],
+          "weaknesses": [
+            "Tarifs variables",
+            "Dépendance à la taille du client"
+          ]
+        },
+        {
+          "name": "FedEx Fulfillment",
+          "strengths": [
+            "Intégration facile avec les plateformes de commerce",
+            "Service client réactif"
+          ],
+          "weaknesses": [
+            "Limité aux zones spécifiques",
+            "Manque de flexibilité sur les petites commandes"
+          ]
+        }
+      ],
+      "positioning": "LIV2GO Se Positionne Comme Une Solution Innovante Pour La Gestion De La Logistique En Entreprise, Axée Sur Les Besoins Des Préparateurs Et Des Livreurs."
+    },
+    "keyFeatures": [
+      "configuration avancée des workflows",
+      "suivi des commandes en temps réel",
+      "gestion des tournées de livraison",
+      "gestion des oublis de produits"
+    ],
+    "strengthsWeaknesses": {
+      "forces": [
+        "Interface Utilisateur Intuitive",
+        "Flexibilité dans la Gestion des Tournées"
+      ],
+      "faiblesses": [
+        "Dépendance à la Connexion Internet",
+        "Complexité Potentielle pour les Nouveaux Utilisateurs"
+      ]
+    },
+    "recommendedPlatforms": {
+      "Web": {
+        "justification": "Permet D'accéder Facilement À La Plateforme Via Un Navigateur."
+      },
+      "Mobile": {
+        "justification": "Offre Une Accessibilité Et Une Flexibilité Optimales Pour Les Préparateurs Et Livreurs En Déplacement."
+      },
+      "Desktop": {
+        "justification": "Pas Nécessaire Pour Ce Projet."
+      }
+    },
+    "boilerplateInstructions": {
+      "setup": "Installer Node.js et les dépendances nécessaires via npm.",
+      "backend": "Configurer un serveur Express.js et une base de données MongoDB.",
+      "deployment": "Déployer sur une plateforme cloud comme AWS ou Heroku.",
+      "versionControl": "Utiliser Git pour le contrôle de version et GitHub pour les dépôts."
+    }
+  }
+}

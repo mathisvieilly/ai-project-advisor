@@ -1,8 +1,79 @@
 'use client';
 
 import Link from 'next/link';
-import { getProjectById, generateBoilerplate, Project } from '../../../utils/actions';
-import { useEffect, useState, use } from 'react';
+import { getProjectById, generateBoilerplate, regenerateSection, Project } from '../../../utils/actions';
+import { ProjectAnalysis } from '../../../utils/ai';
+import { useEffect, useState, use, useCallback } from 'react';
+
+// Composant pour le bouton de régénération d'une section
+function RegenerateButton({
+    sectionKey,
+    projectId,
+    onProjectUpdate
+}: {
+    sectionKey: keyof ProjectAnalysis;
+    projectId: string;
+    onProjectUpdate: () => void;
+}) {
+    const [prompt, setPrompt] = useState('');
+    const [isRegenerating, setIsRegenerating] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!prompt.trim()) return;
+
+        try {
+            setIsRegenerating(true);
+            await regenerateSection(projectId, sectionKey, prompt.trim());
+            setPrompt('');
+
+            // Notifier le parent que le projet a été mis à jour
+            setTimeout(() => {
+                onProjectUpdate();
+            }, 100);
+
+        } catch (err) {
+            console.error('Erreur lors de la régénération:', err);
+            alert('Erreur lors de la régénération de la section');
+        } finally {
+            setIsRegenerating(false);
+        }
+    };
+
+    return (
+        <Popover placement="bottom">
+            <PopoverTrigger>
+                <Button
+                    size="sm"
+                    variant="light"
+                    isIconOnly
+                    isLoading={isRegenerating}
+                    className="opacity-60 hover:opacity-100 transition-opacity"
+                >
+                    {!isRegenerating && <SparklesIcon className="h-4 w-4" />}
+                </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+                <form onSubmit={handleSubmit} className="p-2 space-y-3">
+                    <h4 className="text-sm font-semibold">Régénérer cette section</h4>
+                    <Textarea
+                        placeholder="Entrez votre prompt pour modifier cette section..."
+                        value={prompt}
+                        onChange={(e) => setPrompt(e.target.value)}
+                        size="sm"
+                        minRows={2}
+                        className="w-full"
+                    />
+                    <div className="flex justify-end gap-2">
+                        <Button type="submit" size="sm" color="primary" disabled={!prompt.trim() || isRegenerating}>
+                            {isRegenerating ? 'Régénération...' : 'Régénérer'}
+                        </Button>
+                    </div>
+                </form>
+            </PopoverContent>
+        </Popover>
+    );
+}
 import { Card, CardHeader, CardBody, CardFooter } from '@heroui/card';
 import { Button } from '@heroui/button';
 import { Chip } from '@heroui/chip';
@@ -10,6 +81,9 @@ import { Badge } from '@heroui/badge';
 import { Divider } from '@heroui/divider';
 import { Progress } from '@heroui/progress';
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from '@heroui/table';
+import { Popover, PopoverTrigger, PopoverContent } from '@heroui/popover';
+import { Input } from '@heroui/input';
+import { Textarea } from '@heroui/input';
 import {
     ArrowLeftIcon,
     CogIcon,
@@ -36,6 +110,7 @@ import {
     PresentationChartBarIcon
 } from "@heroicons/react/24/outline";
 
+
 export default function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
     const [project, setProject] = useState<Project | null>(null);
@@ -56,6 +131,22 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
 
         loadProject();
     }, [id]);
+
+    // Rediriger si le projet n'est pas terminé
+    useEffect(() => {
+        if (project && project.status !== 'completed') {
+            window.location.href = '/dashboard';
+        }
+    }, [project]);
+
+    const handleProjectUpdate = useCallback(async () => {
+        try {
+            const updatedProject = await getProjectById(id);
+            setProject(updatedProject);
+        } catch (error) {
+            console.error('Erreur lors du rechargement du projet:', error);
+        }
+    }, [id]); // Utiliser project?.id au lieu de project pour éviter les re-renders
 
     if (isLoading) {
         return (
@@ -131,7 +222,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                 Retour au tableau de bord
                             </Link>
                             <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight">
-                                {project.analysis.name}
+                                {project.analysis?.name}
                             </h1>
                             <div className="flex flex-wrap items-center gap-4 text-sm">
                                 <div className="flex items-center gap-2 text-default-600">
@@ -186,7 +277,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                         <CardBody className="pt-0">
                             <div className="bg-default-50 p-6 rounded-xl border-l-4 border-primary">
                                 <p className="text-default-700 leading-relaxed text-lg italic">
-                                    "{project.analysis.description}"
+                                    "{project.analysis?.description}"
                                 </p>
                             </div>
                         </CardBody>
@@ -196,7 +287,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                 {/* Sections d'analyse avec design amélioré */}
                 <div className="space-y-12">
                     {sections.map((section) => {
-                        const content = project.analysis[section.key as keyof typeof project.analysis];
+                        const content = project.analysis?.[section.key as keyof typeof project.analysis];
 
                         // Section SWOT - Design matriciel visuel
                         if (section.key === 'swotAnalysis' && typeof content === 'object' && content !== null) {
@@ -221,17 +312,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Forces, Faiblesses, Opportunités, Menaces</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="swotAnalysis"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -394,17 +491,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Stratégie de monétisation proposée</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="businessModel"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -500,17 +603,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Positionnement sur le marché</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="competitorsAnalysis"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -611,17 +720,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Analyse du secteur et opportunités</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="marketAnalysis"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -709,17 +824,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Capacités principales de votre solution</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="keyFeatures"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -768,17 +889,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Analyse comparative interne</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="strengthsWeaknesses"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -863,17 +990,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Solutions techniques adaptées</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="recommendedPlatforms"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -925,17 +1058,23 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     </h2>
                                                     <p className="text-default-600">Instructions pour le développement</p>
                                                 </div>
-                                                <Chip
-                                                    color="primary"
-                                                    variant="flat"
-                                                    size="sm"
-                                                    className="ml-auto"
-                                                >
-                                                    <div className="flex items-center justify-center gap-2">
-                                                        <SparklesIcon className="h-3 w-3 mr-1" />
-                                                        <p>IA Généré</p>
-                                                    </div>
-                                                </Chip>
+                                                <div className="flex items-center gap-2 ml-auto">
+                                                    <Chip
+                                                        color="primary"
+                                                        variant="flat"
+                                                        size="sm"
+                                                    >
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <SparklesIcon className="h-3 w-3 mr-1" />
+                                                            <p>IA Généré</p>
+                                                        </div>
+                                                    </Chip>
+                                                    <RegenerateButton
+                                                        sectionKey="boilerplateInstructions"
+                                                        projectId={project.id}
+                                                        onProjectUpdate={handleProjectUpdate}
+                                                    />
+                                                </div>
                                             </div>
                                         </CardHeader>
                                     </Card>
@@ -982,7 +1121,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                 className="mt-1"
                                             >
                                                 <div className="flex items-center justify-center gap-2">
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
+                                                <SparklesIcon className="h-3 w-3 mr-1" />
                                                     <p>IA Généré</p>
                                                 </div>
                                             </Chip>

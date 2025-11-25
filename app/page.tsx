@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createProject } from '../utils/actions';
@@ -15,19 +15,12 @@ export default function Home() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
-    async function handleSubmit(formData: FormData) {
-        setIsLoading(true);
-        setError(null);
+    // Rediriger vers le dashboard pour utiliser la modal
+    useEffect(() => {
+        router.push('/dashboard');
+    }, [router]);
 
-        try {
-            const project = await createProject(formData);
-            router.push(`/project/${project.id}`);
-        } catch (err) {
-            setError((err as Error).message);
-        } finally {
-            setIsLoading(false);
-        }
-    }
+    return null; // Cette page ne s'affiche plus
 
     return (
         <div className="min-h-screen bg-background flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -57,7 +50,7 @@ export default function Home() {
                     </CardHeader>
 
                     <CardBody className="space-y-6">
-                        <form action={handleSubmit} className="space-y-6">
+                        <form action={createProject} className="space-y-6">
                             <div className="space-y-4">
                                 <Input
                                     id="name"
@@ -106,7 +99,7 @@ export default function Home() {
                                 className="w-full font-semibold"
                                 startContent={!isLoading && <SparklesIcon className="h-5 w-5" />}
                             >
-                                {isLoading ? 'Analyse en cours...' : 'Créer et analyser le projet'}
+                                {isLoading ? 'Création en cours...' : 'Créer et analyser le projet'}
                             </Button>
                         </form>
                     </CardBody>

@@ -1,143 +1,144 @@
 {
-    "id": "199b1be4-a2c5-47e6-8f27-18a8a405ff41",
-    "createdAt": "2025-11-25T09:12:27.921Z",
-    "analysis": {
-        "name": "Tarsila",
-        "description": "Une application de gestion d'oeuvre d'art, de transport, de restauration, de prêt à des expositions. Le tout sur une application web destiné aux musées, galleries, collectionneurs privés, transporteurs, et restaurateurs.",
-        "businessModel": {
-            "revenueStreams": [
-                "Abonnements mensuels/annuels pour les musées et galeries",
-                "Frais de transaction pour les prêts d'œuvres",
-                "Services premium de transport et de restauration",
-                "Partenariats avec des institutions culturelles"
-            ],
-            "pricingStrategy": {
-                "tiers": [
-                    {
-                        "name": "Basique",
-                        "price": "29€ par mois",
-                        "features": [
-                            "Gestion d'œuvres",
-                            "Suivi des transports"
-                        ]
-                    },
-                    {
-                        "name": "Pro",
-                        "price": "79€ par mois",
-                        "features": [
-                            "Fonctionnalités Basique",
-                            "Gestion des prêts",
-                            "Rappels automatiques"
-                        ]
-                    },
-                    {
-                        "name": "Entreprise",
-                        "price": "Sur devis",
-                        "features": [
-                            "Fonctionnalités Pro",
-                            "Support premium",
-                            "Intégration sur mesure"
-                        ]
-                    }
-                ]
-            }
-        },
-        "marketAnalysis": {
-            "marketSize": "8 milliards d'euros par an pour le secteur des musées et galeries en Europe",
-            "trends": [
-                "Digitalisation croissante des opérations",
-                "Augmentation des prêts d'œuvres entre institutions",
-                "Demande de transparence dans la gestion des œuvres"
-            ],
-            "opportunities": [
-                "Expansion sur de nouveaux marchés en Asie",
-                "Partenariats avec des plateformes d'art en ligne",
-                "Augmentation de la demande pour des solutions de gestion intégrées"
+  "id": "199b1be4-a2c5-47e6-8f27-18a8a405ff41",
+  "createdAt": "2025-11-25T09:12:27.921Z",
+  "analysis": {
+    "name": "Tarsila",
+    "description": "Une application de gestion d'oeuvre d'art, de transport, de restauration, de prêt à des expositions. Le tout sur une application web destiné aux musées, galleries, collectionneurs privés, transporteurs, et restaurateurs.",
+    "businessModel": {
+      "revenueStreams": [
+        "Abonnements mensuels/annuels pour les musées et galeries",
+        "Frais de transaction pour les prêts d'œuvres",
+        "Services premium de transport et de restauration",
+        "Partenariats avec des institutions culturelles"
+      ],
+      "pricingStrategy": {
+        "tiers": [
+          {
+            "name": "Basique",
+            "price": "29€ par mois",
+            "features": [
+              "Gestion d'œuvres",
+              "Suivi des transports"
             ]
-        },
-        "swotAnalysis": {
-            "Forces": [
-                "Approche intégrée de la gestion des œuvres",
-                "Interface utilisateur conviviale",
-                "Partenariats potentiels avec des institutions culturelles"
-            ],
-            "Faiblesses": [
-                "Dépendance à un marché de niche",
-                "Besoin d'une solide stratégie de marketing",
-                "Coûts initiaux de développement élevés"
-            ],
-            "Opportunités": [
-                "Expansion internationale",
-                "Développement d'outils de réalité augmentée pour visualiser les œuvres",
-                "Croissance de l'intérêt pour l'art numérique"
-            ],
-            "Menaces": [
-                "Concurrence croissante dans le secteur",
-                "Changements réglementaires dans le transport d'œuvres d'art",
-                "Risques de cybersécurité liés à la gestion des données"
+          },
+          {
+            "name": "Pro",
+            "price": "79€ par mois",
+            "features": [
+              "Fonctionnalités Basique",
+              "Gestion des prêts",
+              "Rappels automatiques"
             ]
-        },
-        "competitorsAnalysis": {
-            "mainCompetitors": [
-                {
-                    "name": "Artlogic",
-                    "strengths": [
-                        "Réputation établie",
-                        "Fonctionnalités avancées"
-                    ],
-                    "weaknesses": [
-                        "Prix élevé",
-                        "Interface moins intuitive"
-                    ]
-                },
-                {
-                    "name": "Gallery Manager",
-                    "strengths": [
-                        "Simplicité d'utilisation",
-                        "Support client réactif"
-                    ],
-                    "weaknesses": [
-                        "Fonctionnalités limitées",
-                        "Peu d'intégrations"
-                    ]
-                }
-            ],
-            "positioning": "Tarsila se positionne comme une solution abordable et complète, ciblant les musées et galeries de taille petite à moyenne."
-        },
-        "keyFeatures": [
-            "Gestion des œuvres d'art",
-            "Suivi des transports en temps réel",
-            "Outils de restauration et de documentation",
-            "Gestion des prêts avec calendrier intégré",
-            "Reporting et analyses des activités"
-        ],
-        "strengthsWeaknesses": {
-            "forces": [
-                "Solution tout-en-un",
-                "Facilité d'utilisation",
-                "Support client personnalisé"
-            ],
-            "faiblesses": [
-                "Nouveauté sur le marché",
-                "Manque de reconnaissance de marque initialement"
+          },
+          {
+            "name": "Entreprise",
+            "price": "Sur devis",
+            "features": [
+              "Fonctionnalités Pro",
+              "Support premium",
+              "Intégration sur mesure"
             ]
+          }
+        ]
+      }
+    },
+    "marketAnalysis": {
+      "marketSize": "8 milliards d'euros par an pour le secteur des musées et galeries en Europe",
+      "trends": [
+        "Digitalisation croissante des opérations",
+        "Augmentation des prêts d'œuvres entre institutions",
+        "Demande de transparence dans la gestion des œuvres"
+      ],
+      "opportunities": [
+        "Expansion sur de nouveaux marchés en Asie",
+        "Partenariats avec des plateformes d'art en ligne",
+        "Augmentation de la demande pour des solutions de gestion intégrées"
+      ]
+    },
+    "swotAnalysis": {
+      "Forces": [
+        "Approche intégrée de la gestion des œuvres",
+        "Interface utilisateur conviviale",
+        "Partenariats potentiels avec des institutions culturelles"
+      ],
+      "Faiblesses": [
+        "Dépendance à un marché de niche",
+        "Besoin d'une solide stratégie de marketing",
+        "Coûts initiaux de développement élevés"
+      ],
+      "Opportunités": [
+        "Expansion internationale",
+        "Développement d'outils de réalité augmentée pour visualiser les œuvres",
+        "Croissance de l'intérêt pour l'art numérique"
+      ],
+      "Menaces": [
+        "Concurrence croissante dans le secteur",
+        "Changements réglementaires dans le transport d'œuvres d'art",
+        "Risques de cybersécurité liés à la gestion des données"
+      ]
+    },
+    "competitorsAnalysis": {
+      "mainCompetitors": [
+        {
+          "name": "Artlogic",
+          "strengths": [
+            "Réputation établie",
+            "Fonctionnalités avancées"
+          ],
+          "weaknesses": [
+            "Prix élevé",
+            "Interface moins intuitive"
+          ]
         },
-        "recommendedPlatforms": {
-            "Web": {
-                "justification": "Accessibilité large pour les utilisateurs professionnels, intégration facile avec d'autres outils."
-            },
-            "Mobile": {
-                "justification": "Utilisation sur le terrain pour les transporteurs et restaurateurs."
-            },
-            "Desktop": {
-                "justification": "Fonctionnalités avancées nécessitant une interface riche."
-            }
-        },
-        "boilerplateInstructions": {
-            "setup": "Utiliser un framework moderne comme React ou Angular pour le front-end.",
-            "backend": "Node.js avec Express pour le serveur, MongoDB comme base de données.",
-            "deployment": "Héberger sur des plateformes comme AWS ou Heroku pour une scalabilité.",
-            "versionControl": "Utiliser Git pour la gestion de version avec un dépôt sur GitHub."
+        {
+          "name": "Gallery Manager",
+          "strengths": [
+            "Simplicité d'utilisation",
+            "Support client réactif"
+          ],
+          "weaknesses": [
+            "Fonctionnalités limitées",
+            "Peu d'intégrations"
+          ]
         }
+      ],
+      "positioning": "Tarsila se positionne comme une solution abordable et complète, ciblant les musées et galeries de taille petite à moyenne."
+    },
+    "keyFeatures": [
+      "Gestion des œuvres d'art",
+      "Suivi des transports en temps réel",
+      "Outils de restauration et de documentation",
+      "Gestion des prêts avec calendrier intégré",
+      "Reporting et analyses des activités"
+    ],
+    "strengthsWeaknesses": {
+      "forces": [
+        "Solution tout-en-un",
+        "Facilité d'utilisation",
+        "Support client personnalisé"
+      ],
+      "faiblesses": [
+        "Nouveauté sur le marché",
+        "Manque de reconnaissance de marque initialement"
+      ]
+    },
+    "recommendedPlatforms": {
+      "Web": {
+        "justification": "Accessibilité large pour les utilisateurs professionnels, intégration facile avec d'autres outils."
+      },
+      "Mobile": {
+        "justification": "Utilisation sur le terrain pour les transporteurs et restaurateurs."
+      },
+      "Desktop": {
+        "justification": "Fonctionnalités avancées nécessitant une interface riche."
+      }
+    },
+    "boilerplateInstructions": {
+      "setup": "Utiliser un framework moderne comme React ou Angular pour le front-end.",
+      "backend": "Node.js avec Express pour le serveur, MongoDB comme base de données.",
+      "deployment": "Héberger sur des plateformes comme AWS ou Heroku pour une scalabilité.",
+      "versionControl": "Utiliser Git pour la gestion de version avec un dépôt sur GitHub."
     }
+  },
+  "status": "completed"
 }
