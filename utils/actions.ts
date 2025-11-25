@@ -317,10 +317,15 @@ function getSectionStructure(sectionKey: keyof ProjectAnalysis): string {
   ],
   "positioning": "Positionnement stratégique du projet"
 }`,
-        keyFeatures: `["fonctionnalité1", "fonctionnalité2", "fonctionnalité3"]`,
+        keyFeatures: `[
+  "Fonctionnalité principale 1",
+  "Fonctionnalité principale 2",
+  "Fonctionnalité principale 3",
+  "Fonctionnalité principale 4"
+]`,
         strengthsWeaknesses: `{
-  "forces": ["force produit1", "force produit2"],
-  "faiblesses": ["faiblesse produit1", "faiblesse produit2"]
+  "forces": ["Force produit1", "Force produit2"],
+  "faiblesses": ["Faiblesse produit1", "Faiblesse produit2"]
 }`,
         recommendedPlatforms: `{
   "Web": {"justification": "Raison web"},
