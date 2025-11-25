@@ -227,8 +227,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -398,8 +400,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -444,10 +448,9 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                         <div key={tier.name} className="border border-default-200 dark:border-default-700 rounded-lg p-4 hover:shadow-md transition-shadow">
                                                             <div className="flex items-center justify-between mb-3">
                                                                 <div className="flex items-center gap-3">
-                                                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                                                                        index === 0 ? 'bg-blue-500' :
+                                                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${index === 0 ? 'bg-blue-500' :
                                                                         index === 1 ? 'bg-purple-500' : 'bg-orange-500'
-                                                                    }`}>
+                                                                        }`}>
                                                                         <span className="text-white font-bold text-sm">
                                                                             {index === 0 ? 'B' : index === 1 ? 'P' : 'E'}
                                                                         </span>
@@ -503,8 +506,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -612,8 +617,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -708,8 +715,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -765,8 +774,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -787,10 +798,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                         <div key={index} className="space-y-2">
                                                             <div className="flex justify-between text-sm">
                                                                 <span className="text-default-700 font-medium">{force}</span>
-                                                                <span className="text-green-600 font-semibold">Fort</span>
+                                                                <span className="text-green-600 font-semibold">100%</span>
                                                             </div>
                                                             <Progress
-                                                                value={85 + Math.random() * 15}
+                                                                value={100}
                                                                 color="success"
                                                                 size="sm"
                                                                 className="h-2"
@@ -815,10 +826,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                         <div key={index} className="space-y-2">
                                                             <div className="flex justify-between text-sm">
                                                                 <span className="text-default-700 font-medium">{faiblesse}</span>
-                                                                <span className="text-orange-600 font-semibold">À améliorer</span>
+                                                                <span className="text-orange-600 font-semibold">100%</span>
                                                             </div>
                                                             <Progress
-                                                                value={30 + Math.random() * 40}
+                                                                value={100}
                                                                 color="warning"
                                                                 size="sm"
                                                                 className="h-2"
@@ -858,8 +869,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -871,10 +884,9 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                             <Card key={platform} className="shadow-lg border-0 bg-content1 hover:shadow-xl transition-shadow">
                                                 <CardHeader className="pb-3">
                                                     <div className="flex items-center gap-3">
-                                                        <div className={`p-3 rounded-full ${
-                                                            platform === 'Web' ? 'bg-blue-500' :
+                                                        <div className={`p-3 rounded-full ${platform === 'Web' ? 'bg-blue-500' :
                                                             platform === 'Mobile' ? 'bg-green-500' : 'bg-purple-500'
-                                                        }`}>
+                                                            }`}>
                                                             {platform === 'Web' && <GlobeAltIcon className="h-6 w-6 text-white" />}
                                                             {platform === 'Mobile' && <CpuChipIcon className="h-6 w-6 text-white" />}
                                                             {platform === 'Desktop' && <WrenchScrewdriverIcon className="h-6 w-6 text-white" />}
@@ -919,8 +931,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                     size="sm"
                                                     className="ml-auto"
                                                 >
-                                                    <SparklesIcon className="h-3 w-3 mr-1" />
-                                                    IA Généré
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <SparklesIcon className="h-3 w-3 mr-1" />
+                                                        <p>IA Généré</p>
+                                                    </div>
                                                 </Chip>
                                             </div>
                                         </CardHeader>
@@ -933,8 +947,8 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                 <CardHeader className="pb-3">
                                                     <h3 className="text-lg font-semibold text-foreground capitalize">
                                                         {key === 'setup' ? 'Configuration' :
-                                                         key === 'backend' ? 'Backend' :
-                                                         key === 'deployment' ? 'Déploiement' : 'Contrôle de version'}
+                                                            key === 'backend' ? 'Backend' :
+                                                                key === 'deployment' ? 'Déploiement' : 'Contrôle de version'}
                                                     </h3>
                                                 </CardHeader>
                                                 <CardBody>
@@ -967,8 +981,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                                 size="sm"
                                                 className="mt-1"
                                             >
-                                                <SparklesIcon className="h-3 w-3 mr-1" />
-                                                IA Généré
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <SparklesIcon className="h-3 w-3 mr-1" />
+                                                    <p>IA Généré</p>
+                                                </div>
                                             </Chip>
                                         </div>
                                     </div>
@@ -976,9 +992,9 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                                 <CardBody className="pt-0">
                                     <div className="text-sm text-default-700 leading-relaxed">
                                         {typeof content === 'string' ? content :
-                                         Array.isArray(content) ? (content as string[]).join(', ') :
-                                         typeof content === 'object' && content !== null ? JSON.stringify(content, null, 2) :
-                                         String(content)}
+                                            Array.isArray(content) ? (content as string[]).join(', ') :
+                                                typeof content === 'object' && content !== null ? JSON.stringify(content, null, 2) :
+                                                    String(content)}
                                     </div>
                                 </CardBody>
                             </Card>
